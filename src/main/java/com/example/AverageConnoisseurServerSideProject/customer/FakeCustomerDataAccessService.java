@@ -1,9 +1,12 @@
 package com.example.AverageConnoisseurServerSideProject.customer;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository("Fake")
 public class FakeCustomerDataAccessService implements CustomerDAO {
     private List<Customer> db = new ArrayList<>();
 
