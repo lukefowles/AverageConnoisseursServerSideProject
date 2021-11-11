@@ -1,5 +1,7 @@
 package com.example.AverageConnoisseurServerSideProject.restaurant;
 
+import com.example.AverageConnoisseurServerSideProject.review.Review;
+
 import java.util.List;
 import java.util.Objects;
 
