@@ -8,7 +8,8 @@ import java.util.Optional;
 @RestController
 public class CustomerController {
     private CustomerService customerService;
-@Autowired
+
+    @Autowired
     public CustomerController(CustomerService customerService){
         this.customerService = customerService;
     }
@@ -23,7 +24,7 @@ public class CustomerController {
         customerService.updateCustomer(id, customer);
     }
 
-    @GetMapping
+    @GetMapping("{id}")
     public Optional<Customer> viewCustomer(@PathVariable("id") long id){
         return customerService.viewCustomer(id);
 
