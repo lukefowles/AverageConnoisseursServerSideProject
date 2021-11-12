@@ -1,5 +1,6 @@
 package com.example.AverageConnoisseurServerSideProject.review;
 
+import com.example.AverageConnoisseurServerSideProject.customer.Customer;
 import com.example.AverageConnoisseurServerSideProject.customer.FakeCustomerDataAccessService;
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +13,9 @@ public class FakeReviewDataAccessService implements ReviewDAO {
     private List<Review> reviewdb = new ArrayList<>();
 
     public FakeReviewDataAccessService(){
-        reviewdb.add(new Review(2,1,4,"good service"));
-        reviewdb.add(new Review(3,2,1,"food was cold"));
-        reviewdb.add(new Review(4,3,0,"i was robbed"));
+        reviewdb.add(new Review(1,2,1,4,"good service"));
+        reviewdb.add(new Review(2,3,2,1,"food was cold"));
+        reviewdb.add(new Review(3,4,3,0,"i was robbed"));
 
     }
 
@@ -22,21 +23,25 @@ public class FakeReviewDataAccessService implements ReviewDAO {
         reviewdb.add(review);
     }
 
-    ///do we need a stream?
-    public void removeReview(Review review){
-        reviewdb.remove(review);
+    public void removeReview(long review_ID){
+        Optional<Review> review = reviewdb.stream().filter(r -> (r.getReview_ID()==(review_ID))).findAny();
+        review.ifPresent(r -> reviewdb.remove(r));
     }
 
-//    public List<Reviews>  getCustomerReviews(long customer_ID){
-//        List<Review> customerReviews = reviewdb.stream().filter(review -> review.getCustomer_ID()==(customer_ID);
-//        return customerReviews;
-//    }
+    public List<Review>  getCustomerReviews(long customer_ID){
+        List<Review> customerReviews = reviewdb.stream().filter(review -> review.getCustomer_ID()==(customer_ID)).toList();
+        return customerReviews;
+    }
 
-    //getRestaurantReviews
+    public List<Review>  getRestaurantReviews(long restaurant_ID){
+        List<Review> restaurantReviews = reviewdb.stream().filter(review -> review.getRestaurant_ID()==(restaurant_ID)).toList();
+        return restaurantReviews;
+    }
 
-    public void updateReview(long restaurant_ID, long customer_ID, Review review){
+
+    public void updateReview(long review_ID, Review review){
         reviewdb.stream().forEach(r -> {
-            if((restaurant_ID == r.getRestaurant_ID()) &&(customer_ID == r.getCustomer_ID())){
+            if(review_ID == r.getReview_ID() ){
                 r.setRating(review.getRating());
                 r.setComment(review.getComment());
             }

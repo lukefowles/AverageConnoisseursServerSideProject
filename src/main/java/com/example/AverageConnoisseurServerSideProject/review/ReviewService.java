@@ -14,8 +14,8 @@ public class ReviewService {
         reviewDAO.addReview(review);
     };
 
-    public void removeReview(long restaurant_ID, long customer_ID){
-        reviewDAO.removeReview(restaurant_ID, customer_ID);
+    public void removeReview(long review_ID){
+        reviewDAO.removeReview(review_ID);
     };
 
     /// return type changed to list
@@ -27,7 +27,7 @@ public class ReviewService {
         return reviewDAO.getRestaurantReviews(restaurant_ID);
     };
 
-    public void updateReview(long restaurant_ID, long customer_ID, Review review){
-        reviewDAO.updateReview(restaurant_ID, customer_ID, review);
+    public void updateReview(long review_ID, Review review){
+        reviewDAO.updateReview(review_ID, review);
     };
 }
