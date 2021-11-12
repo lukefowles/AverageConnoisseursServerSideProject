@@ -1,12 +1,16 @@
 package com.example.AverageConnoisseurServerSideProject.review;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
+@Service
 public class ReviewService {
 
     private ReviewDAO reviewDAO;
 
-    public ReviewService(ReviewDAO reviewDAO) {
+    public ReviewService(@Qualifier("FakeReviews") ReviewDAO reviewDAO) {
         this.reviewDAO = reviewDAO;
     }
 

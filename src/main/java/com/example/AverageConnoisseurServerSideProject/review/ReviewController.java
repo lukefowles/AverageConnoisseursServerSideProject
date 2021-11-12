@@ -25,12 +25,12 @@ public class ReviewController {
         reviewService.updateReview(review_ID, review);
     }
 
-    @GetMapping("{id}")
+    @GetMapping(path = "customer/{id}")
     public List<Review> getCustomerReviews(@PathVariable("{id}") long customer_ID){
         return reviewService.getCustomerReviews(customer_ID);
     }
 
-    @GetMapping("{id}")
+    @GetMapping(path = "restaurant/{id}")
     public List<Review> getRestaurantReviews(@PathVariable("{id}") long restaurant_ID){
         return reviewService.getRestaurantReviews(restaurant_ID);
     }
