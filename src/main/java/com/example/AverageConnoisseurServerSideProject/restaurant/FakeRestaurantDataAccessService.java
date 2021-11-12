@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-@Repository("Fake")
+@Repository("FakeRestaurantData")
 public class FakeRestaurantDataAccessService implements RestaurantDAO {
     private List<Restaurant> db = new ArrayList<>();
 
