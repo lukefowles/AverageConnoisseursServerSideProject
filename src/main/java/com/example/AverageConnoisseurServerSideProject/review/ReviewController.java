@@ -21,22 +21,22 @@ public class ReviewController {
     }
 
     @PutMapping("{id}")
-    public void updateReview(@PathVariable("{id}") long review_ID, @RequestBody Review review){
+    public void updateReview(@PathVariable("id") long review_ID, @RequestBody Review review){
         reviewService.updateReview(review_ID, review);
     }
 
     @GetMapping(path = "customer/{id}")
-    public List<Review> getCustomerReviews(@PathVariable("{id}") long customer_ID){
+    public List<Review> getCustomerReviews(@PathVariable("id") long customer_ID){
         return reviewService.getCustomerReviews(customer_ID);
     }
 
     @GetMapping(path = "restaurant/{id}")
-    public List<Review> getRestaurantReviews(@PathVariable("{id}") long restaurant_ID){
+    public List<Review> getRestaurantReviews(@PathVariable("id") long restaurant_ID){
         return reviewService.getRestaurantReviews(restaurant_ID);
     }
 
     @DeleteMapping("{id}")
-    public void removeReview(@PathVariable("{id}") long review_ID){
+    public void removeReview(@PathVariable("id") long review_ID){
         reviewService.removeReview(review_ID);
     }
 
