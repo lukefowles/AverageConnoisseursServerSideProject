@@ -12,7 +12,7 @@ public class RestaurantService {
 
     private RestaurantDAO restaurantDAO;
 
-    public RestaurantService(@Qualifier("Fake") RestaurantDAO restaurantDAO) {this.restaurantDAO = restaurantDAO;};
+    public RestaurantService(@Qualifier("FakeRestaurantData") RestaurantDAO restaurantDAO) {this.restaurantDAO = restaurantDAO;};
 
     public void addRestaurant(Restaurant restaurant){
         restaurantDAO.addRestaurant(restaurant);
