@@ -12,7 +12,7 @@ public class RestaurantService {
 
     private RestaurantDAO restaurantDAO;
 
-    public RestaurantService(@Qualifier("FakeRestaurantData") RestaurantDAO restaurantDAO) {this.restaurantDAO = restaurantDAO;};
+    public RestaurantService(@Qualifier("postgres") RestaurantDAO restaurantDAO) {this.restaurantDAO = restaurantDAO;};
 
     public void addRestaurant(Restaurant restaurant){
         restaurantDAO.addRestaurant(restaurant);
@@ -29,4 +29,8 @@ public class RestaurantService {
     public Optional<Restaurant> getRestaurantName(long id){
         return restaurantDAO.getRestaurantName(id);
     };
+
+    public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
+        return restaurantDAO.selectRestaurantFromCriteria(restaurantCriteria);
+    }
 }
