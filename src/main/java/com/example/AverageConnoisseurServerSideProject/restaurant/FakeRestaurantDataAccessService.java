@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Repository("FakeRestaurantData")
 public class FakeRestaurantDataAccessService implements RestaurantDAO {
     private List<Restaurant> db = new ArrayList<>();
@@ -46,5 +48,16 @@ public class FakeRestaurantDataAccessService implements RestaurantDAO {
     public Optional<Restaurant> getRestaurantName(long id) {
         Optional<Restaurant> restaurant = db.stream().filter(r -> r.getID() == (id)).findAny();
         return restaurant;
+    }
+
+    @Override
+    public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
+        return Optional.of(db.stream().filter(r -> r.getCuisine().contains(restaurantCriteria.getCuisine())
+                                    && r.isVegetarian() == restaurantCriteria.isVegetarian()
+                                    && r.isHalal() == restaurantCriteria.isIshalal()
+                                    && r.isGlutenFree() == restaurantCriteria.isGlutenFree()
+                                    && r.getPrice() <= restaurantCriteria.getPrice()
+                                    && r.getAverageRating() >= restaurantCriteria.getAverageRating()
+                                    ).collect(Collectors.toList()));
     }
 }
