@@ -33,4 +33,25 @@ public class RestaurantService {
     public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
         return restaurantDAO.selectRestaurantFromCriteria(restaurantCriteria);
     }
+
+//    public List<Restaurant> filterRestaurants(long restaurant_ID, float averageRating) {
+//        List<Restaurant> ids = new ArrayList<>();
+//        List<Restaurant> ratings = new ArrayList<>();
+//
+//        for (int i=0; i < ids.length; i++) {
+//            if (// if restaurant id 1 is greater > equal then takes over)
+//        } ids.add(restaurant_ID);
+//        averageRating.add(restaurant);
+//    }
+//    int listOfRating = ids.size();
+//    List<Restaurant> idx = new ArrayList<>(listOfRating);
+//    for (int i=0; i < listORating; i++) {
+//        idx.add("add rating of restaurant");
+//    }
+//    sort out ratings of code
+
+    public List<Restaurant> sortRestaurantsByRatings(){
+      return restaurantDAO.sortRestaurantsByRatings();
+    }
+
 }
