@@ -18,22 +18,23 @@ public class ReviewDataAccessService implements ReviewDAO {
         String sql = """
                 INSERT INTO reviews(restaurant_ID, customer_ID, rating, comment) VALUES(?, ?, ?, ?);
                 """;
-        jdbcTemplate.update(sql,review.getRestaurant_ID(), review.getCustomer_ID(),
+        jdbcTemplate.update(sql, review.getRestaurant_ID(), review.getCustomer_ID(),
                 review.getRating(),review.getComment());
     }
 
     @Override
-    public void removeReview(long review_ID) {
+    public void removeReview(long review_ID, long restaurant_ID) {
         String sql = """
                 DELETE FROM reviews WHERE review_ID = ?;""";
         jdbcTemplate.update(sql, review_ID );
 
     }
 
+    /// inner join added
     @Override
     public List<Review> getCustomerReviews(long customer_ID) {
         String sql = """
-                SELECT * FROM reviews WHERE customer_ID = ?;""";
+                SELECT restaurant.restaurantName, rating, comment FROM reviews INNER JOIN restaurants ON  WHERE customer_ID = ?;""";
         return jdbcTemplate.query(sql, new ReviewRowMapper(), customer_ID);
     }
 
@@ -49,5 +50,15 @@ public class ReviewDataAccessService implements ReviewDAO {
         String sql = """
                 UPDATE reviews SET( rating, comment) = (?, ?) WHERE review_ID = ?;""";
         jdbcTemplate.update(sql, review.getRating(), review.getComment(), review_ID);
+    }
+
+    @Override
+    public long calculateRestaurantAverageRating(long id) {
+        String sql = """
+                SELECT rating AVG(rating) FROM review WHERE restaurant_ID = ?;
+                """;
+    //    long newAverage = 0;
+    //    newAverage = jdbcTemplate.queryForObject(sql, newAverage, id);
+        return 5;
     }
 }

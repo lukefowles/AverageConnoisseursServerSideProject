@@ -52,6 +52,7 @@ public class RestaurantDataAccessService implements RestaurantDAO {
                         restaurant.isGlutenFree(), restaurant.getPrice(), restaurant.getAverageRating(), id);
     }
 
+
     @Override
     public Optional<Restaurant> getRestaurantName(long id) {
         String sql = """
@@ -81,4 +82,13 @@ public class RestaurantDataAccessService implements RestaurantDAO {
                 restaurantCriteria.isGlutenFree(), restaurantCriteria.getPrice(),
                 restaurantCriteria.getAverageRating()));
     }
+
+        @Override
+        public void updateRestaurantAverageRating(long id, float averageRating){
+            String sql = """
+                   
+                    UPDATE restaurants SET averageRating = ? WHERE id = ?;
+                    """;
+            jdbcTemplate.update(sql, averageRating, id);
+        }
 }

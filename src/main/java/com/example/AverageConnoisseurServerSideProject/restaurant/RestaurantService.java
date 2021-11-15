@@ -33,4 +33,8 @@ public class RestaurantService {
     public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
         return restaurantDAO.selectRestaurantFromCriteria(restaurantCriteria);
     }
+
+    public void updateRestaurantAverageRating(long id, float newAverage){
+        restaurantDAO.updateRestaurantAverageRating(id, newAverage);
+    }
 }

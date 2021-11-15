@@ -11,4 +11,7 @@ public interface RestaurantDAO {
     public Optional<Restaurant> getRestaurantName(long id);
 
     public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria);
+
+
+    public void updateRestaurantAverageRating(long id, float newAverage);
 }
