@@ -6,7 +6,7 @@ CREATE TABLE reviews(
     customer_ID INT FOREIGN KEY REFERENCES customers(id),)
 )
 
-CREATE TABLE wishlist(
+CREATE TABLE wishlists(
 wishlist_ID BIGSERIAL PRIMARY KEY,
 restaurant_ID INT FOREIGN KEY REFERENCES restaurants(id),
 customer_ID INT FOREIGN KEY REFERENCES customers(id)
