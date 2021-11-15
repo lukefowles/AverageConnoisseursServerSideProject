@@ -60,4 +60,9 @@ public class FakeRestaurantDataAccessService implements RestaurantDAO {
                                     && r.getAverageRating() >= restaurantCriteria.getAverageRating()
                                     ).collect(Collectors.toList()));
     }
+
+    @Override
+    public List<Restaurant> sortRestaurantsByRatings() {
+        return null;
+    }
 }

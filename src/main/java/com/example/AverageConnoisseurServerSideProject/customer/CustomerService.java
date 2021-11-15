@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class CustomerService {
@@ -29,6 +31,7 @@ public class CustomerService {
         customerDAO.updateCustomer(id, customer);
     }
 
+
 //    static void createCustomer(String name, String email, long number){
 //
 //    }
@@ -48,5 +51,19 @@ public class CustomerService {
 //    static void searchForRestaurant(){
 //
 //    }
+
+    private Pattern regexPattern;
+    private Matcher regMatcher;
+
+    public String emailValidator(String email) {
+        regexPattern = Pattern.compile("^[(a-zA-Z-0-9-\\_\\+\\.)]+@[(a-z-A-z)]+\\.[(a-zA-z)]{2,3}$");
+        regMatcher = regexPattern.matcher(email);
+
+        if(regMatcher.matches()) {
+            return "Valid Email Address";
+        } else {
+            return "Invalid Email Address";
+        }
+    }
 
 }
