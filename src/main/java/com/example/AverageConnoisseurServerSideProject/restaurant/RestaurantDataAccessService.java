@@ -55,8 +55,12 @@ public class RestaurantDataAccessService implements RestaurantDAO {
     @Override
     public Optional<Restaurant> getRestaurantName(long id) {
         String sql = """
-                    SELECT *
-                    FROM restaurants
+                    SELECT review_ID, restaurant_ID, customer_ID, rating,
+                    comment, restaurantName, restaurantAddress, cuisine, vegetarian,
+                    halal, glutenFree, price, averageRating 
+                    FROM restaurants 
+                    INNER JOIN reviews
+                    ON restaurants.id = reviews.restaurant_ID;
                     WHERE id = ?
                 """;
         return jdbcTemplate.query(sql, new RestaurantRowMapper(), id)
@@ -81,4 +85,5 @@ public class RestaurantDataAccessService implements RestaurantDAO {
                 restaurantCriteria.isGlutenFree(), restaurantCriteria.getPrice(),
                 restaurantCriteria.getAverageRating()));
     }
+
 }
