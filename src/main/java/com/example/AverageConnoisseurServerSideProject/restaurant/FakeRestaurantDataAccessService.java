@@ -62,6 +62,9 @@ public class FakeRestaurantDataAccessService implements RestaurantDAO {
     }
 
     @Override
+
+    public void updateRestaurantAverageRating(long id, float newAverage) {
+
     public List<Restaurant> sortRestaurantsByRatings() {
         return null;
     }

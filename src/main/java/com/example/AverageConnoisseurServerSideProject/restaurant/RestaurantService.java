@@ -34,6 +34,11 @@ public class RestaurantService {
         return restaurantDAO.selectRestaurantFromCriteria(restaurantCriteria);
     }
 
+
+    public void updateRestaurantAverageRating(long id, float newAverage){
+        restaurantDAO.updateRestaurantAverageRating(id, newAverage);
+    }
+
 //    public List<Restaurant> filterRestaurants(long restaurant_ID, float averageRating) {
 //        List<Restaurant> ids = new ArrayList<>();
 //        List<Restaurant> ratings = new ArrayList<>();
