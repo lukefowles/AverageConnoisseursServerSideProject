@@ -37,4 +37,9 @@ public class RestaurantController {
        return restaurantService.selectRestaurantFromCriteria(restaurantCriteria);
     }
 
+    @PutMapping("{id}")
+    public void updateRestaurantAverageRating(@PathVariable("id") long id, float newAverage){
+        restaurantService.updateRestaurantAverageRating(id,newAverage);
+    }
+
 }
