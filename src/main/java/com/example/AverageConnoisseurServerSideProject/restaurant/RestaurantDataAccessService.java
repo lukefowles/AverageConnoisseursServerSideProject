@@ -52,6 +52,7 @@ public class RestaurantDataAccessService implements RestaurantDAO {
                         restaurant.isGlutenFree(), restaurant.getPrice(), restaurant.getAverageRating(), id);
     }
 
+
     @Override
     public Optional<Restaurant> getRestaurantName(long id) {
         String sql = """
@@ -71,19 +72,71 @@ public class RestaurantDataAccessService implements RestaurantDAO {
     @Override
     public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
         String sql = """
-                SELECT * 
-                FROM restaurants
+                SELECT 
+                review_ID,
+                restaurant_ID,
+                customer_ID,
+                rating,
+                comments,
+                restaurantName,
+                restaurantAddress,
+                cuisine,
+                vegetarian,
+                halal,
+                glutenFree,
+                price,
+                averageRatings
+                FROM restaurants 
+                INNER JOIN Reviews
+                ON restaurants.id = reviews.restaurants_ID
                 WHERE cuisine = ?
                 AND vegetarian = ?
                 AND halal = ?
                 AND glutenFree = ?
                 AND price >= ?
                 AND averageRating >= ?
+                ORDER BY averageRating DESC
                 """;
         return Optional.of(jdbcTemplate.query(sql, new RestaurantRowMapper(), restaurantCriteria.getCuisine(),
                 restaurantCriteria.isVegetarian(), restaurantCriteria.isIshalal(),
                 restaurantCriteria.isGlutenFree(), restaurantCriteria.getPrice(),
                 restaurantCriteria.getAverageRating()));
+    }
+
+
+        @Override
+        public void updateRestaurantAverageRating(long id, float averageRating){
+            String sql = """
+                   
+                    UPDATE restaurants SET averageRating = ? WHERE id = ?;
+                    """;
+            jdbcTemplate.update(sql, averageRating, id);
+        }
+
+    @Override
+    public List<Restaurant> sortRestaurantsByRatings(){
+        String sql = """
+                SELECT 
+                review_ID,
+                restaurant_ID,
+                customer_ID,
+                rating,
+                comments,
+                restaurantName,
+                restaurantAddress,
+                cuisine,
+                vegetarian,
+                halal,
+                glutenFree,
+                price,
+                averageRatings
+                FROM restaurants 
+                INNER JOIN Reviews
+                ON restaurants.id = reviews.restaurants_ID
+                ORDER BY averageRating DESC
+                """;
+        return jdbcTemplate.query(sql, new RestaurantRowMapper());
+
     }
 
 }
