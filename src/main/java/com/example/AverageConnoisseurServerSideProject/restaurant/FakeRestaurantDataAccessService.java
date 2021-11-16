@@ -68,5 +68,10 @@ public class FakeRestaurantDataAccessService implements RestaurantDAO {
     public List<Restaurant> sortRestaurantsByRatings() {
         return null;
     }
+
+    @Override
+    public List<Restaurant> getAllRestaurants() {
+        return null;
+    }
 }
 

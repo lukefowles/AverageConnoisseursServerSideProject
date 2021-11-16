@@ -14,6 +14,6 @@ public interface RestaurantDAO {
 
     public void updateRestaurantAverageRating(long id, float newAverage);
 
-    public List<Restaurant> sortRestaurantsByRatings();
+    List<Restaurant> getAllRestaurants();
 
 }

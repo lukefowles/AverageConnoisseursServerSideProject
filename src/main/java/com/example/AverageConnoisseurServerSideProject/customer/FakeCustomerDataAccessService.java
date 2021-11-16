@@ -39,4 +39,9 @@ public class FakeCustomerDataAccessService implements CustomerDAO {
             }
         });
     }
+
+    @Override
+    public List<Customer> viewAllCustomers() {
+        return null;
+    }
 }

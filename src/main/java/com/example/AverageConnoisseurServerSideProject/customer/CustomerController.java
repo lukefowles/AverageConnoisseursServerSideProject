@@ -3,6 +3,8 @@ package com.example.AverageConnoisseurServerSideProject.customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
+import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/customer")
@@ -29,6 +31,11 @@ public class CustomerController {
     public Optional<Customer> viewCustomer(@PathVariable("id") long id){
         return customerService.viewCustomer(id);
 
+    }
+
+    @GetMapping
+    public List<Customer> viewAllCustomers () {
+        return customerService.viewAllCustomers();
     }
 
     @DeleteMapping("{id}")
