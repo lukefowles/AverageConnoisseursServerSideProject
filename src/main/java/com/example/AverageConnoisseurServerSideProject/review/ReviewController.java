@@ -35,8 +35,8 @@ public class ReviewController {
         return reviewService.getRestaurantReviews(restaurant_ID);
     }
 
-    @DeleteMapping("{id}")
-    public void removeReview(@PathVariable("id") long review_ID, long restaurant_ID){
+    @DeleteMapping("{id}/{id2}")
+    public void removeReview(@PathVariable("id") long review_ID, @PathVariable("id2") long restaurant_ID){
         reviewService.removeReview(review_ID, restaurant_ID);
     }
 
