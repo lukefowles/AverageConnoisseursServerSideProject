@@ -11,8 +11,12 @@ public class WishlistService {
 
     private WishlistDAO wishlistDAO;
 
-    public void addRestaurantToWishlist (@Qualifier("PostgresWishlist") long restaurant_ID, Wishlist wishlist)
-    { wishlistDAO.addRestaurantToWishlist(restaurant_ID, wishlist);}
+    public WishlistService(@Qualifier("PostgresWishlist") WishlistDAO wishlistDAO) {
+        this.wishlistDAO = wishlistDAO;
+    }
+
+    public void addRestaurantToWishlist (long restaurant_ID, long customer_ID)
+    { wishlistDAO.addRestaurantToWishlist(restaurant_ID, customer_ID);}
 
     public void removeRestaurantFromWishlist (long restaurant_ID, long customer_ID)
     { wishlistDAO.removeRestaurantFromWishlist(restaurant_ID, customer_ID);}

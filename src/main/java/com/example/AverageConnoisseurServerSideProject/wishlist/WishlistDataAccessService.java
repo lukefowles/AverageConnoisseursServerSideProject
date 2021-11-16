@@ -1,5 +1,6 @@
 package com.example.AverageConnoisseurServerSideProject.wishlist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -8,18 +9,21 @@ import java.util.List;
 @Repository("PostgresWishlist")
 public class WishlistDataAccessService implements WishlistDAO {
 
+    @Autowired
+    WishlistRowMapper wishlistRowMapper;
+
     private JdbcTemplate jdbcTemplate;
 
     public WishlistDataAccessService(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     @Override
-    public void addRestaurantToWishlist(long restaurant_ID, Wishlist wishlist) {
+    public void addRestaurantToWishlist(long restaurant_ID, long customer_ID) {
         String sql = """
-                INSERT INTO wishlists(restaurant_ID, customer_ID,) VALUES(?, ?);
+                INSERT INTO wishlists(restaurant_ID, customer_ID) VALUES(?, ?);
                 """;
 
-        jdbcTemplate.update(sql, wishlist.getRestaurant_ID(),
-                wishlist.getCustomer_ID());
+        jdbcTemplate.update(sql, restaurant_ID,
+                customer_ID);
     }
 
     @Override
@@ -36,6 +40,6 @@ public class WishlistDataAccessService implements WishlistDAO {
         String sql = """
                 SELECT * FROM wishlists WHERE customer_ID = ?;
                 """;
-        return jdbcTemplate.query(sql, new WishlistRowMapper(), customer_ID);
+        return jdbcTemplate.query(sql, wishlistRowMapper, customer_ID);
     }
 }
