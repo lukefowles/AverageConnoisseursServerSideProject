@@ -6,10 +6,10 @@ public class Review {
     private long review_ID;
     private long restaurant_ID;
     private long customer_ID;
-    private int rating;
+    private float rating;
     private String comment;
 
-    public Review(long review_ID, long restaurant_ID, long customer_ID, int rating, String comment) {
+    public Review(long review_ID, long restaurant_ID, long customer_ID, float rating, String comment) {
         this.review_ID = review_ID;
         this.restaurant_ID = restaurant_ID;
         this.customer_ID = customer_ID;
@@ -41,11 +41,11 @@ public class Review {
         this.customer_ID = customer_ID;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
@@ -62,7 +62,7 @@ public class Review {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return review_ID == review.review_ID && restaurant_ID == review.restaurant_ID && customer_ID == review.customer_ID && rating == review.rating && Objects.equals(comment, review.comment);
+        return review_ID == review.review_ID && restaurant_ID == review.restaurant_ID && customer_ID == review.customer_ID && Float.compare(review.rating, rating) == 0 && Objects.equals(comment, review.comment);
     }
 
     @Override

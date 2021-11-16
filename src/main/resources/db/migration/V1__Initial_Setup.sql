@@ -3,4 +3,4 @@ CREATE TABLE customers (
     customerName VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     mobileNumber int NOT NULL
-}
+)

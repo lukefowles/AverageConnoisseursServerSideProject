@@ -23,6 +23,11 @@ public class FakeReviewDataAccessService implements ReviewDAO {
         reviewdb.add(review);
     }
 
+    @Override
+    public void removeReview(long review_ID, long restaurant_ID) {
+
+    }
+
     public void removeReview(long review_ID){
         Optional<Review> review = reviewdb.stream().filter(r -> (r.getReview_ID()==(review_ID))).findAny();
         review.ifPresent(r -> reviewdb.remove(r));
@@ -46,6 +51,11 @@ public class FakeReviewDataAccessService implements ReviewDAO {
                 r.setComment(review.getComment());
             }
         });
+    }
+
+    @Override
+    public float calculateRestaurantAverageRating(long id) {
+        return 0;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.AverageConnoisseurServerSideProject.restaurant;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.flywaydb.core.internal.jdbc.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,9 @@ import java.util.Optional;
 
 @Repository("postgres")
 public class RestaurantDataAccessService implements RestaurantDAO {
+
+    @Autowired
+    RestaurantRowMapper autowiredRowmapper;
 
     private JdbcTemplate jdbcTemplate;
 
@@ -56,15 +60,11 @@ public class RestaurantDataAccessService implements RestaurantDAO {
     @Override
     public Optional<Restaurant> getRestaurantName(long id) {
         String sql = """
-                    SELECT review_ID, restaurant_ID, customer_ID, rating,
-                    comment, restaurantName, restaurantAddress, cuisine, vegetarian,
-                    halal, glutenFree, price, averageRating 
-                    FROM restaurants 
-                    INNER JOIN reviews
-                    ON restaurants.id = reviews.restaurant_ID;
+                    SELECT * 
+                    FROM restaurants
                     WHERE id = ?
                 """;
-        return jdbcTemplate.query(sql, new RestaurantRowMapper(), id)
+        return jdbcTemplate.query(sql, autowiredRowmapper, id)
                 .stream()
                 .findFirst();
     }
@@ -72,23 +72,8 @@ public class RestaurantDataAccessService implements RestaurantDAO {
     @Override
     public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
         String sql = """
-                SELECT 
-                review_ID,
-                restaurant_ID,
-                customer_ID,
-                rating,
-                comments,
-                restaurantName,
-                restaurantAddress,
-                cuisine,
-                vegetarian,
-                halal,
-                glutenFree,
-                price,
-                averageRatings
+                SELECT *
                 FROM restaurants 
-                INNER JOIN Reviews
-                ON restaurants.id = reviews.restaurants_ID
                 WHERE cuisine = ?
                 AND vegetarian = ?
                 AND halal = ?
@@ -97,7 +82,7 @@ public class RestaurantDataAccessService implements RestaurantDAO {
                 AND averageRating >= ?
                 ORDER BY averageRating DESC
                 """;
-        return Optional.of(jdbcTemplate.query(sql, new RestaurantRowMapper(), restaurantCriteria.getCuisine(),
+        return Optional.of(jdbcTemplate.query(sql, autowiredRowmapper, restaurantCriteria.getCuisine(),
                 restaurantCriteria.isVegetarian(), restaurantCriteria.isIshalal(),
                 restaurantCriteria.isGlutenFree(), restaurantCriteria.getPrice(),
                 restaurantCriteria.getAverageRating()));
@@ -116,26 +101,11 @@ public class RestaurantDataAccessService implements RestaurantDAO {
     @Override
     public List<Restaurant> sortRestaurantsByRatings(){
         String sql = """
-                SELECT 
-                review_ID,
-                restaurant_ID,
-                customer_ID,
-                rating,
-                comments,
-                restaurantName,
-                restaurantAddress,
-                cuisine,
-                vegetarian,
-                halal,
-                glutenFree,
-                price,
-                averageRatings
+                SELECT *
                 FROM restaurants 
-                INNER JOIN Reviews
-                ON restaurants.id = reviews.restaurants_ID
                 ORDER BY averageRating DESC
                 """;
-        return jdbcTemplate.query(sql, new RestaurantRowMapper());
+        return jdbcTemplate.query(sql, autowiredRowmapper);
 
     }
 

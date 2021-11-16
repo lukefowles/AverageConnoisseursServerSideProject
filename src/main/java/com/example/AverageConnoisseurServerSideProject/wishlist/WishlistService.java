@@ -1,6 +1,7 @@
 package com.example.AverageConnoisseurServerSideProject.wishlist;
 
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,7 +11,7 @@ public class WishlistService {
 
     private WishlistDAO wishlistDAO;
 
-    public void addRestaurantToWishlist (long restaurant_ID, Wishlist wishlist)
+    public void addRestaurantToWishlist (@Qualifier("PostgresWishlist") long restaurant_ID, Wishlist wishlist)
     { wishlistDAO.addRestaurantToWishlist(restaurant_ID, wishlist);}
 
     public void removeRestaurantFromWishlist (long restaurant_ID, long customer_ID)
