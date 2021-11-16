@@ -1,15 +1,15 @@
 CREATE TABLE reviews(
-    id BIGSERIAL PRIMARY KEY,
+    review_ID BIGSERIAL PRIMARY KEY,
     rating INT,
     reviewComment VARCHAR(255),
-    restaurant_ID INT FOREIGN KEY REFERENCES restaurants(id),
-    customer_ID INT FOREIGN KEY REFERENCES customers(id),)
-)
+    restaurant_ID INT REFERENCES restaurants(id),
+    customer_ID INT REFERENCES customers(id)
+);
 
 CREATE TABLE wishlists(
-wishlist_ID BIGSERIAL PRIMARY KEY,
-restaurant_ID INT FOREIGN KEY REFERENCES restaurants(id),
-customer_ID INT FOREIGN KEY REFERENCES customers(id)
-)
+    wishlist_ID BIGSERIAL PRIMARY KEY,
+    restaurant_ID INT REFERENCES restaurants(id),
+    customer_ID INT REFERENCES customers(id)
+);
 
-INSERT INTO reviews(rating, reviewComment, restaurant_ID, customer_ID) VALUES( 5, "good service", 1, 1);
+INSERT INTO reviews(rating, reviewComment, restaurant_ID, customer_ID) VALUES( 5, 'good service', 1, 1);

@@ -14,7 +14,7 @@ public class ReviewRowMapper implements RowMapper<Review> {
         rs.getInt("restaurant_ID"),
         rs.getInt("customer_ID"),
         rs.getInt("rating"),
-        rs.getString("comment")
+        rs.getString("reviewComment")
         );
         return review;    }
 }
