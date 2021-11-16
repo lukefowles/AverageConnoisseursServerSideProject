@@ -17,7 +17,7 @@ public class ReviewDataAccessService implements ReviewDAO {
     @Override
     public void addReview(Review review) {
         String sql = """
-                INSERT INTO reviews(restaurant_ID, customer_ID, rating, comment) VALUES(?, ?, ?, ?);
+                INSERT INTO reviews(restaurant_ID, customer_ID, rating, reviewComment) VALUES(?, ?, ?, ?);
                 """;
         jdbcTemplate.update(sql, review.getRestaurant_ID(), review.getCustomer_ID(),
                 review.getRating(),review.getComment());
@@ -49,14 +49,14 @@ public class ReviewDataAccessService implements ReviewDAO {
     @Override
     public void updateReview(long review_ID, Review review) {
         String sql = """
-                UPDATE reviews SET( rating, comment) = (?, ?) WHERE review_ID = ?;""";
+                UPDATE reviews SET( rating, reviewComment) = (?, ?) WHERE review_ID = ?;""";
         jdbcTemplate.update(sql, review.getRating(), review.getComment(), review_ID);
     }
 
     @Override
     public float calculateRestaurantAverageRating(long id) {
         String sql = """
-                SELECT rating AVG(rating) FROM review WHERE restaurant_ID = ?;
+                SELECT AVG(rating) FROM reviews WHERE restaurant_ID = ?;
                 """;
     //    long newAverage = 0;
         Float newAverage = jdbcTemplate.queryForObject(sql, Float.class, id);
