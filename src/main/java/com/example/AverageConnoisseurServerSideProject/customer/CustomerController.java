@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@RequestMapping("/customer")
 @RestController
 public class CustomerController {
     private CustomerService customerService;
