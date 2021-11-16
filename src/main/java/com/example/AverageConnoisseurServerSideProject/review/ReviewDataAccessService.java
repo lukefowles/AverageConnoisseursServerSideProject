@@ -1,5 +1,6 @@
 package com.example.AverageConnoisseurServerSideProject.review;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -34,7 +35,7 @@ public class ReviewDataAccessService implements ReviewDAO {
     @Override
     public List<Review> getCustomerReviews(long customer_ID) {
         String sql = """
-                SELECT restaurant.restaurantName, rating, comment FROM reviews INNER JOIN restaurants ON  WHERE customer_ID = ?;""";
+                SELECT * FROM reviews WHERE customer_ID = ?;""";
         return jdbcTemplate.query(sql, new ReviewRowMapper(), customer_ID);
     }
 
@@ -53,12 +54,12 @@ public class ReviewDataAccessService implements ReviewDAO {
     }
 
     @Override
-    public long calculateRestaurantAverageRating(long id) {
+    public float calculateRestaurantAverageRating(long id) {
         String sql = """
                 SELECT rating AVG(rating) FROM review WHERE restaurant_ID = ?;
                 """;
     //    long newAverage = 0;
-    //    newAverage = jdbcTemplate.queryForObject(sql, newAverage, id);
-        return 5;
+        Float newAverage = jdbcTemplate.queryForObject(sql, Float.class, id);
+        return newAverage;
     }
 }

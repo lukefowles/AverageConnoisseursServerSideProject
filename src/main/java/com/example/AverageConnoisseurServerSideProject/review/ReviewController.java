@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reviews")
+@RequestMapping("/review")
 public class ReviewController {
 
     private ReviewService reviewService;
@@ -40,8 +40,8 @@ public class ReviewController {
         reviewService.removeReview(review_ID, restaurant_ID);
     }
 
-    @GetMapping
-    public void calculateRestaurantAverageRating(long id){
-        reviewService.calculateRestaurantAverageRating(id);
-    };
+//    @GetMapping
+//    public void calculateRestaurantAverageRating(long id){
+//        reviewService.calculateRestaurantAverageRating(id);
+//    };
 }

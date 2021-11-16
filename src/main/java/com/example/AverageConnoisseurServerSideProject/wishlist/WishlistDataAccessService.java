@@ -34,7 +34,7 @@ public class WishlistDataAccessService implements WishlistDAO {
     @Override
     public List<Wishlist> getWishlist(long customer_ID) {
         String sql = """
-                SELECT * FROM wishlists INNER JOIN restaurants ON restaurant_ID = id WHERE customer_ID = ?;
+                SELECT * FROM wishlists WHERE customer_ID = ?;
                 """;
         return jdbcTemplate.query(sql, new WishlistRowMapper(), customer_ID);
     }

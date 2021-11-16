@@ -12,19 +12,20 @@ public class ReviewService {
     private RestaurantDAO restaurantDAO;
     private ReviewDAO reviewDAO;
 
-    public ReviewService(@Qualifier("FakeReviews") ReviewDAO reviewDAO, RestaurantDAO restaurantDAO) {
+    public ReviewService(@Qualifier("PostgresReview") ReviewDAO reviewDAO, @Qualifier("postgres") RestaurantDAO restaurantDAO) {
         this.reviewDAO = reviewDAO;
-        this.restaurantDAO = restaurantDAO;    }
+        this.restaurantDAO = restaurantDAO;
+    }
 
     public void addReview(Review review){
         reviewDAO.addReview(review);
-        long newAverage = reviewDAO.calculateRestaurantAverageRating(review.getRestaurant_ID());
+        float newAverage = reviewDAO.calculateRestaurantAverageRating(review.getRestaurant_ID());
         restaurantDAO.updateRestaurantAverageRating(review.getRestaurant_ID(),newAverage);
     };
 
     public void removeReview(long review_ID, long restaurant_ID){
         reviewDAO.removeReview(review_ID, restaurant_ID);
-        long newAverage = reviewDAO.calculateRestaurantAverageRating(restaurant_ID);
+        float newAverage = reviewDAO.calculateRestaurantAverageRating(restaurant_ID);
         restaurantDAO.updateRestaurantAverageRating(restaurant_ID,newAverage);
     };
 
@@ -36,12 +37,13 @@ public class ReviewService {
         return reviewDAO.getRestaurantReviews(restaurant_ID);
     };
 
-    public void calculateRestaurantAverageRating(long id){
-        reviewDAO.calculateRestaurantAverageRating(id);
-    };
+//    public float calculateRestaurantAverageRating(long id){
+//        reviewDAO.calculateRestaurantAverageRating(id);
+//    };
 
     public void updateReview(long review_ID, Review review){
-
         reviewDAO.updateReview(review_ID, review);
     };
+
+   //Could also implement logic to get restaurant from review ID.
 }
