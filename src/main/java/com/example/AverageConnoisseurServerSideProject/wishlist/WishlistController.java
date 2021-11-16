@@ -12,20 +12,26 @@ public class WishlistController {
     private WishlistService wishlistService;
 
     @Autowired
-    public WishlistController(WishlistService wishlist) {this.wishlistService = wishlistService;}
+    public WishlistController(WishlistService wishlistService) {this.wishlistService = wishlistService;}
 
-    @PostMapping
-    public void addRestaurantToWishlist(@RequestBody long restaurant_ID, Wishlist wishlist)
-    {wishlistService.addRestaurantToWishlist(restaurant_ID, wishlist);}
+//    @PostMapping
+//    public void addRestaurantToWishlist(@RequestBody Wishlist wishlist)
+//    {wishlistService.addRestaurantToWishlist(wishlist);}
+    @PostMapping ("{id}/{id2}")
+    public void addRestaurantToWishlist(@PathVariable("id") long restaurant_ID, @PathVariable("id2") long customer_ID)
+    {wishlistService.addRestaurantToWishlist(restaurant_ID, customer_ID);
+
+    }
 
 
-    @GetMapping(path = "wishlist/{id}")
+
+    @GetMapping(path = "{id}")
     public List<Wishlist> getWishlist(@PathVariable("id") long customer_ID) {
         return wishlistService.getWishlist(customer_ID);
     }
 
-    @DeleteMapping ("{id}")
-    public void removeRestaurantFromWishlist(@PathVariable("id") long restaurant_ID, long customer_ID)
+    @DeleteMapping ("{id}/{id2}")
+    public void removeRestaurantFromWishlist(@PathVariable("id") long restaurant_ID, @PathVariable("id2") long customer_ID)
         {wishlistService.removeRestaurantFromWishlist(restaurant_ID, customer_ID);
 
     }
