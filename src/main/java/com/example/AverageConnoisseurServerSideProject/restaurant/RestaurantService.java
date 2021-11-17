@@ -77,7 +77,8 @@ public class RestaurantService {
         int priceCondition = restaurantCriteria.getPrice();
         float ratingCondition = restaurantCriteria.getAverageRating();
 
-        if(restaurantDAO.selectRestaurantFromCriteria(restaurantCriteria).isEmpty())
+        if(restaurantDAO.selectRestaurantFromCriteria(cuisineCondition, vegCondition1, vegCondition2, halalCondition1,
+                halalCondition2, glutenCondition1, glutenCondition2, priceCondition, ratingCondition).isEmpty())
         {
             throw new ResourceNotFound("No restaurants found matching these criteria");
         }
