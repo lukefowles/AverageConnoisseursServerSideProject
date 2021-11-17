@@ -19,7 +19,8 @@ public class ReviewService {
     }
 
     public void addReview(Review review){
-
+        //When review is added also need to calculate the new rating for the restaurant and update the restaurant
+        //database
         reviewDAO.addReview(review);
         float newAverage = reviewDAO.calculateRestaurantAverageRating(review.getRestaurant_ID());
         restaurantDAO.updateRestaurantAverageRating(review.getRestaurant_ID(), newAverage);
@@ -27,7 +28,8 @@ public class ReviewService {
     };
 
     public void removeReview(long review_ID, long restaurant_ID){
-
+        //When review is removed also need to calculate the new rating for the restaurant and update the restaurant
+        //database
         reviewDAO.removeReview(review_ID, restaurant_ID);
         float newAverage = reviewDAO.calculateRestaurantAverageRating(restaurant_ID);
         restaurantDAO.updateRestaurantAverageRating(restaurant_ID,newAverage);
@@ -48,6 +50,7 @@ public class ReviewService {
         return reviewDAO.getRestaurantReviews(restaurant_ID);
     };
 
+    //METHOD NOT IN USE
 //    public float calculateRestaurantAverageRating(long id){
 //        reviewDAO.calculateRestaurantAverageRating(id);
 //    };
@@ -57,7 +60,5 @@ public class ReviewService {
         reviewDAO.updateReview(review_ID, review);
         float newAverage = reviewDAO.calculateRestaurantAverageRating(review.getRestaurant_ID());
         restaurantDAO.updateRestaurantAverageRating(review.getRestaurant_ID(), newAverage);
-    };
-
-   //Could also implement logic to get restaurant from review ID.
+    }
 }

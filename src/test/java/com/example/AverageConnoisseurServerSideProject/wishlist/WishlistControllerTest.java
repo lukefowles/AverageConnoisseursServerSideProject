@@ -91,6 +91,7 @@ class WishlistControllerTest {
                 5, 1, null);
         when(wishlistService.getWishlist(customer_ID)).thenReturn(List.of(restaurant));
 
+
         //when
 
         List<Restaurant> restaurants = underTest.getWishlist(customer_ID);

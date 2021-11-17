@@ -69,25 +69,25 @@ public class RestaurantDataAccessService implements RestaurantDAO {
                 .findFirst();
     }
 
-    //TODO: change criteria
-    @Override
-    public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
-        String sql = """
-                SELECT *
-                FROM restaurants 
-                WHERE cuisine = ?
-                AND vegetarian = ?
-                AND halal = ?
-                AND glutenFree = ?
-                AND price >= ?
-                AND averageRating >= ?
-                ORDER BY averageRating DESC
-                """;
-        return Optional.of(jdbcTemplate.query(sql, autowiredRowmapper, restaurantCriteria.getCuisine(),
-                restaurantCriteria.isVegetarian(), restaurantCriteria.isIshalal(),
-                restaurantCriteria.isGlutenFree(), restaurantCriteria.getPrice(),
-                restaurantCriteria.getAverageRating()));
-    }
+    //METHOD BELOW NO LONGER IN USE
+//    @Override
+//    public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
+//        String sql = """
+//                SELECT *
+//                FROM restaurants
+//                WHERE cuisine = ?
+//                AND vegetarian = ?
+//                AND halal = ?
+//                AND glutenFree = ?
+//                AND price >= ?
+//                AND averageRating >= ?
+//                ORDER BY averageRating DESC
+//                """;
+//        return Optional.of(jdbcTemplate.query(sql, autowiredRowmapper, restaurantCriteria.getCuisine(),
+//                restaurantCriteria.isVegetarian(), restaurantCriteria.isIshalal(),
+//                restaurantCriteria.isGlutenFree(), restaurantCriteria.getPrice(),
+//                restaurantCriteria.getAverageRating()));
+//    }
 
 
     @Override

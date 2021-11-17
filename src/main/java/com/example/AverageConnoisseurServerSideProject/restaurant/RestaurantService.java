@@ -38,6 +38,7 @@ public class RestaurantService {
             throw new ResourceNotFound("Restaurant with this id not found");
         }
 
+        //When removing a restaurant also need to remove all associated reviews and wishlists
         restaurantDAO.removeRestaurant(id);
         reviewDAO.deleteReviewsByRestaurant(id);
         wishlistDAO.removeWishlistWithRestaurantID(id);
@@ -65,7 +66,7 @@ public class RestaurantService {
 
     public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
 
-        //Conditions to pass into SQL statement
+        //Conditions to pass into SQL statement in restaurantDAO.selectRestaurantFromCriteria method
         String cuisineCondition = restaurantCriteria.getCuisine();
         boolean vegCondition1 = true;
         boolean vegCondition2 = restaurantCriteria.isVegetarian();
@@ -76,7 +77,8 @@ public class RestaurantService {
         int priceCondition = restaurantCriteria.getPrice();
         float ratingCondition = restaurantCriteria.getAverageRating();
 
-        if(restaurantDAO.selectRestaurantFromCriteria(restaurantCriteria).isEmpty())
+        if(restaurantDAO.selectRestaurantFromCriteria(cuisineCondition, vegCondition1, vegCondition2, halalCondition1,
+                halalCondition2, glutenCondition1, glutenCondition2, priceCondition, ratingCondition).isEmpty())
         {
             throw new ResourceNotFound("No restaurants found matching these criteria");
         }

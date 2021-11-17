@@ -15,25 +15,26 @@ public class WishlistController {
     @Autowired
     public WishlistController(WishlistService wishlistService) {this.wishlistService = wishlistService;}
 
-
+    //Method to add a wishlisted restaurant to the database, passing in the customer and restaurant id
     @PostMapping ("{id}/{id2}")
     public void addRestaurantToWishlist(@PathVariable("id") long restaurant_ID, @PathVariable("id2") long customer_ID)
     {wishlistService.addRestaurantToWishlist(restaurant_ID, customer_ID);
 
     }
 
-
+    //Method to get a wishlist based on customer_ID
     @GetMapping(path = "{id}")
     public List<Restaurant> getWishlist(@PathVariable("id") long customer_ID) {
         return wishlistService.getWishlist(customer_ID);
     }
 
+    //Method to delete a restaurant from a wishlist based on customer and restaurant_ID
     @DeleteMapping ("{id}/{id2}")
     public void removeRestaurantFromWishlist(@PathVariable("id") long restaurant_ID, @PathVariable("id2") long customer_ID)
         {wishlistService.removeRestaurantFromWishlist(restaurant_ID, customer_ID);
 
     }
-
+//    METHOD NOT IN USE
 //    @GetMapping("{id}")
 //    public Wishlist returnFavourite(long wishlist_ID)
 //    {

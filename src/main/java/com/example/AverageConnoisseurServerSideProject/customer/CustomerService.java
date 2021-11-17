@@ -36,6 +36,8 @@ public class CustomerService {
         {
             throw new ResourceNotFound("Person with this id does not exist");
         }
+
+        //Call methods to delete reviews and wishlists from the database for that customer
         wishlistDAO.removeWishlistWithCustomerID(id);
         reviewDAO.deleteReviewsByCustomer(id);
 
