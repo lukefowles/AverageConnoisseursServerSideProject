@@ -109,4 +109,24 @@ public class RestaurantDataAccessService implements RestaurantDAO {
         return jdbcTemplate.query(sql, autowiredRowmapper);
     }
 
+    @Override
+    public Optional<List<Restaurant>> selectRestaurantFromCriteria(String cuisineCondition, boolean vegCondition1, boolean vegCondition2, boolean halalCondition1, boolean halalCondition2, boolean glutenCondition1, boolean glutenCondition2, int priceCondition, float ratingCondition) {
+        String sql = """
+                SELECT * 
+                FROM restaurants
+                WHERE cuisine LIKE ?
+                AND (vegetarian = ?
+                OR vegetarian = ?)
+                AND (halal = ?
+                OR halal = ?)
+                AND (glutenFree = ?
+                OR glutenFree = ?)
+                AND price <= ?
+                AND averageRating >= ?
+                ORDER BY averageRating DESC
+                """;
+        return Optional.of(jdbcTemplate.query(sql, autowiredRowmapper, "%" + cuisineCondition + "%", vegCondition1, vegCondition2,
+        halalCondition1, halalCondition2, glutenCondition1, glutenCondition2, priceCondition, ratingCondition));
+    }
+
 }

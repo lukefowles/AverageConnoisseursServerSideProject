@@ -33,4 +33,10 @@ public class WishlistController {
         {wishlistService.removeRestaurantFromWishlist(restaurant_ID, customer_ID);
 
     }
+
+//    @GetMapping("{id}")
+//    public Wishlist returnFavourite(long wishlist_ID)
+//    {
+//       return wishlistService.returnFavourite(wishlist_ID);
+//    }
 }
