@@ -10,4 +10,8 @@ public interface ReviewDAO {
     public List<Review> getRestaurantReviews(long restaurant_ID);
     public void updateReview(long review_ID, Review review);
     public float calculateRestaurantAverageRating(long id);
+
+    void deleteReviewsByCustomer(long customer_ID);
+
+    void deleteReviewsByRestaurant(long restaurant_ID);
 }

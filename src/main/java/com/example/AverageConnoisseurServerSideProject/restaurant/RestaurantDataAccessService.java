@@ -69,6 +69,7 @@ public class RestaurantDataAccessService implements RestaurantDAO {
                 .findFirst();
     }
 
+    //TODO: change criteria
     @Override
     public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
         String sql = """

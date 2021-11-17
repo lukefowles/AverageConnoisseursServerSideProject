@@ -62,4 +62,19 @@ public class ReviewDataAccessService implements ReviewDAO {
         Float newAverage = jdbcTemplate.queryForObject(sql, Float.class, id);
         return newAverage;
     }
+
+    @Override
+    public void deleteReviewsByCustomer(long customer_ID) {
+        String sql = """
+                DELETE * FROM reviews WHERE customer_ID = ?;""";
+        jdbcTemplate.update(sql, customer_ID);
+    }
+
+    @Override
+    public void deleteReviewsByRestaurant(long restaurant_ID) {
+        String sql = """
+                DELETE * FROM reviews WHERE restaurant_ID = ?;""";
+        jdbcTemplate.update(sql, restaurant_ID);
+    }
 }
+
