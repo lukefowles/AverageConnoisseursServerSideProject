@@ -1,5 +1,7 @@
 package com.example.AverageConnoisseurServerSideProject.wishlist;
 
+import com.example.AverageConnoisseurServerSideProject.restaurant.Restaurant;
+import com.example.AverageConnoisseurServerSideProject.restaurant.RestaurantRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -11,6 +13,9 @@ public class WishlistDataAccessService implements WishlistDAO {
 
     @Autowired
     WishlistRowMapper wishlistRowMapper;
+
+    @Autowired
+    RestaurantRowMapper restaurantRowMapper;
 
     private JdbcTemplate jdbcTemplate;
 
@@ -36,10 +41,14 @@ public class WishlistDataAccessService implements WishlistDAO {
 
 
     @Override
-    public List<Wishlist> getWishlist(long customer_ID) {
+    public List<Restaurant> getWishlist(long customer_ID) {
         String sql = """
-                SELECT * FROM wishlists WHERE customer_ID = ?;
+                SELECT * 
+                FROM wishlists
+                RIGHT JOIN restaurants
+                ON wishlists.restaurant_id = restaurants.id
+                WHERE customer_ID = ?;
                 """;
-        return jdbcTemplate.query(sql, wishlistRowMapper, customer_ID);
+        return jdbcTemplate.query(sql, restaurantRowMapper, customer_ID);
     }
 }

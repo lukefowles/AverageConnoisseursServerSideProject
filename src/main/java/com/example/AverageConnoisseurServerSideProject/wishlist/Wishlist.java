@@ -5,6 +5,8 @@ import com.example.AverageConnoisseurServerSideProject.restaurant.Restaurant;
 import java.util.Objects;
 import java.util.Optional;
 
+//Wishlist class. Each instance of class wishlist represents one item on the customer's wishlist, and not the entire wishlist
+//itself
 public class Wishlist {
 
     private long restaurant_ID;

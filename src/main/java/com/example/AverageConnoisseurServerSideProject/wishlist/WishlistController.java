@@ -1,5 +1,6 @@
 package com.example.AverageConnoisseurServerSideProject.wishlist;
 
+import com.example.AverageConnoisseurServerSideProject.restaurant.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,6 @@ public class WishlistController {
     @Autowired
     public WishlistController(WishlistService wishlistService) {this.wishlistService = wishlistService;}
 
-//    @PostMapping
-//    public void addRestaurantToWishlist(@RequestBody Wishlist wishlist)
-//    {wishlistService.addRestaurantToWishlist(wishlist);}
 
     @PostMapping ("{id}/{id2}")
     public void addRestaurantToWishlist(@PathVariable("id") long restaurant_ID, @PathVariable("id2") long customer_ID)
@@ -25,9 +23,8 @@ public class WishlistController {
     }
 
 
-
     @GetMapping(path = "{id}")
-    public List<Wishlist> getWishlist(@PathVariable("id") long customer_ID) {
+    public List<Restaurant> getWishlist(@PathVariable("id") long customer_ID) {
         return wishlistService.getWishlist(customer_ID);
     }
 

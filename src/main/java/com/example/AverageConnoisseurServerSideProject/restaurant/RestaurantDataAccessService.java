@@ -89,7 +89,7 @@ public class RestaurantDataAccessService implements RestaurantDAO {
     }
 
 
-        @Override
+    @Override
         public void updateRestaurantAverageRating(long id, float averageRating){
             String sql = """
                    
@@ -99,14 +99,13 @@ public class RestaurantDataAccessService implements RestaurantDAO {
         }
 
     @Override
-    public List<Restaurant> sortRestaurantsByRatings(){
+    public List<Restaurant> getAllRestaurants() {
         String sql = """
-                SELECT *
-                FROM restaurants 
+                SELECT * 
+                FROM restaurants
                 ORDER BY averageRating DESC
                 """;
         return jdbcTemplate.query(sql, autowiredRowmapper);
-
     }
 
 }

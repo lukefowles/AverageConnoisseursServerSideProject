@@ -1,8 +1,10 @@
 package com.example.AverageConnoisseurServerSideProject.customer;
 
+import com.example.AverageConnoisseurServerSideProject.exceptions.ResourceNotFound;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,46 +14,52 @@ public class CustomerService {
 
     private CustomerDAO customerDAO;
 
-    public CustomerService(@Qualifier("Fake") CustomerDAO customerDAO){
+    public CustomerService(@Qualifier("postgresCustomer") CustomerDAO customerDAO){
+
         this.customerDAO = customerDAO;
     }
 
     public void addCustomerToDatabase(Customer customer){
+
         customerDAO.addCustomerToDatabase(customer);
     }
 
     public void removeCustomerFromDatabase(long id){
+
+        if (customerDAO.viewCustomer(id).isEmpty())
+        {
+            throw new ResourceNotFound("Person with this id does not exist");
+        }
+
         customerDAO.removeCustomerFromDatabase(id);
     }
 
     public Optional<Customer> viewCustomer(long id){
+        if (customerDAO.viewCustomer(id).isEmpty())
+        {
+            throw new ResourceNotFound("Person with this id not found");
+        }
         return customerDAO.viewCustomer(id);
     }
+
     public void updateCustomer(long id, Customer customer){
+
+        if (customerDAO.viewCustomer(id).isEmpty())
+        {
+            throw new ResourceNotFound("Person with this id does not exist");
+        }
+
         customerDAO.updateCustomer(id, customer);
     }
 
+    public List<Customer> viewAllCustomers() {
 
-//    static void createCustomer(String name, String email, long number){
-//
-//    }
-//
-//    static void addReview(long ID, String restaurantName, int rating, String comment){
-//
-//    }
-//
-//    static void deleteCustomer(long ID){
-//
-//    }
-//
-//    static void addToWishlist(long ID, String restaurantName){
-//
-//    }
-//
-//    static void searchForRestaurant(){
-//
-//    }
+        return customerDAO.viewAllCustomers();
+    }
 
+
+
+    //Email validator not in use
     private Pattern regexPattern;
     private Matcher regMatcher;
 

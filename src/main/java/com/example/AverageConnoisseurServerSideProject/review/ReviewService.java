@@ -1,5 +1,6 @@
 package com.example.AverageConnoisseurServerSideProject.review;
 
+import com.example.AverageConnoisseurServerSideProject.exceptions.ResourceNotFound;
 import com.example.AverageConnoisseurServerSideProject.restaurant.RestaurantDAO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -18,22 +19,32 @@ public class ReviewService {
     }
 
     public void addReview(Review review){
+
         reviewDAO.addReview(review);
         float newAverage = reviewDAO.calculateRestaurantAverageRating(review.getRestaurant_ID());
-        restaurantDAO.updateRestaurantAverageRating(review.getRestaurant_ID(),newAverage);
+        restaurantDAO.updateRestaurantAverageRating(review.getRestaurant_ID(), newAverage);
+
     };
 
     public void removeReview(long review_ID, long restaurant_ID){
+
         reviewDAO.removeReview(review_ID, restaurant_ID);
         float newAverage = reviewDAO.calculateRestaurantAverageRating(restaurant_ID);
         restaurantDAO.updateRestaurantAverageRating(restaurant_ID,newAverage);
+
     };
 
     public List<Review> getCustomerReviews(long customer_ID){
+
         return reviewDAO.getCustomerReviews(customer_ID);
     };
 
     public List<Review> getRestaurantReviews(long restaurant_ID){
+
+        if(reviewDAO.getRestaurantReviews(restaurant_ID).isEmpty())
+        {
+            throw new ResourceNotFound("No reviews found");
+        }
         return reviewDAO.getRestaurantReviews(restaurant_ID);
     };
 
@@ -42,6 +53,7 @@ public class ReviewService {
 //    };
 
     public void updateReview(long review_ID, Review review){
+
         reviewDAO.updateReview(review_ID, review);
     };
 
