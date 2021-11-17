@@ -16,9 +16,9 @@ INSERT INTO customers(customerName, email, mobileNumber) VALUES('Yonis', 'yonis@
 INSERT INTO customers(customerName, email, mobileNumber) VALUES('Aaishah', 'aaishah@lukemail.com', 0800001066);
 
 INSERT INTO restaurants(restaurantName, cuisine, restaurantAddress, vegetarian, halal, glutenFree, price,
- averageRating) VALUES ('Greggs', 'bakery', '1 Greggs Avenue', FALSE, FALSE, FALSE, 1, 5.0);
+ averageRating) VALUES ('Greggs', 'Bakery', '1 Greggs Avenue', FALSE, FALSE, FALSE, 1, 5.0);
 INSERT INTO restaurants(restaurantName, cuisine, restaurantAddress, vegetarian, halal, glutenFree, price,
- averageRating) VALUES ('Mono Wraps', 'kebab', '234 Holloway Road', FALSE, TRUE, FALSE, 1, 5.0);
+ averageRating) VALUES ('Mono Wraps', 'Kebab', '234 Holloway Road', FALSE, TRUE, FALSE, 1, 5.0);
 INSERT INTO restaurants(restaurantName, cuisine, restaurantAddress, vegetarian, halal, glutenFree, price
  , averageRating) VALUES ('Xiian Impressions', 'Chinese', '12 Benwell Road', TRUE, FALSE, FALSE, 1, 4.4);
 INSERT INTO restaurants(restaurantName, cuisine, restaurantAddress, vegetarian, halal, glutenFree, price,
