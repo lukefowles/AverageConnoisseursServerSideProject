@@ -68,4 +68,9 @@ public class FakeReviewDataAccessService implements ReviewDAO {
 
     }
 
+    @Override
+    public List<Review> getAllReviews() {
+        return null;
+    }
+
 }

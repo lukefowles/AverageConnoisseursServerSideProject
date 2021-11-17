@@ -39,9 +39,9 @@ public class RestaurantService {
         }
 
         //When removing a restaurant also need to remove all associated reviews and wishlists
-        restaurantDAO.removeRestaurant(id);
-        reviewDAO.deleteReviewsByRestaurant(id);
         wishlistDAO.removeWishlistWithRestaurantID(id);
+        reviewDAO.deleteReviewsByRestaurant(id);
+        restaurantDAO.removeRestaurant(id);
     };
 
     public void updateRestaurant(long id, Restaurant restaurant){

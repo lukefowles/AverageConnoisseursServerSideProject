@@ -56,15 +56,24 @@ public class WishlistDataAccessService implements WishlistDAO {
     @Override
     public void removeWishlistWithRestaurantID(long restaurant_ID){
         String sql = """
-        DELETE * FROM wishlists WHERE restaurant_ID = ?;        
+        DELETE FROM wishlists WHERE restaurant_ID = ?;        
         """;
         jdbcTemplate.update(sql, restaurant_ID);
     }
 
     @Override
+    public List<Wishlist> getAllWishlisted() {
+       String sql = """
+               SELECT *
+               FROM wishlists""";
+
+       return jdbcTemplate.query(sql, wishlistRowMapper);
+    }
+
+    @Override
     public void removeWishlistWithCustomerID(long customer_ID){
         String sql = """
-                DELETE * FROM wishlists WHERE customer_ID = ?;""";
+                DELETE FROM wishlists WHERE customer_ID = ?;""";
         jdbcTemplate.update(sql, customer_ID);
     }
 

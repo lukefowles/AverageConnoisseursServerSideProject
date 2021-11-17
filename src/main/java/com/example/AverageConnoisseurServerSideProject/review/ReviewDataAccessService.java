@@ -66,15 +66,23 @@ public class ReviewDataAccessService implements ReviewDAO {
     @Override
     public void deleteReviewsByCustomer(long customer_ID) {
         String sql = """
-                DELETE * FROM reviews WHERE customer_ID = ?;""";
+                DELETE FROM reviews WHERE customer_ID = ?;""";
         jdbcTemplate.update(sql, customer_ID);
     }
 
     @Override
     public void deleteReviewsByRestaurant(long restaurant_ID) {
         String sql = """
-                DELETE * FROM reviews WHERE restaurant_ID = ?;""";
+                DELETE FROM reviews WHERE restaurant_ID = ?;""";
         jdbcTemplate.update(sql, restaurant_ID);
+    }
+
+    @Override
+    public List<Review> getAllReviews() {
+        String sql = """
+                SELECT *
+                FROM reviews""";
+        return jdbcTemplate.query(sql, new ReviewRowMapper());
     }
 }
 

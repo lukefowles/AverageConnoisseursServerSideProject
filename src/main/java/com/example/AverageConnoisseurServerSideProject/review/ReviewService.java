@@ -61,4 +61,9 @@ public class ReviewService {
         float newAverage = reviewDAO.calculateRestaurantAverageRating(review.getRestaurant_ID());
         restaurantDAO.updateRestaurantAverageRating(review.getRestaurant_ID(), newAverage);
     }
+
+    public List<Review> getAllReviews() {
+
+        return reviewDAO.getAllReviews();
+    }
 }

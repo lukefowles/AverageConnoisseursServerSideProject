@@ -39,6 +39,12 @@ public class ReviewController {
         return reviewService.getRestaurantReviews(restaurant_ID);
     }
 
+    //Method to get all reviews from database
+    @GetMapping("/allReviews")
+    public List<Review> getAllReviews() {
+        return reviewService.getAllReviews();
+    }
+
     //Method to delete a review based off of review_ID and restaurant_ID
     @DeleteMapping("{id}/{id2}")
     public void removeReview(@PathVariable("id") long review_ID, @PathVariable("id2") long restaurant_ID){
