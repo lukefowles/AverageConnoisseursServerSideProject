@@ -1,5 +1,6 @@
 package com.example.AverageConnoisseurServerSideProject.wishlist;
 
+import com.example.AverageConnoisseurServerSideProject.restaurant.Restaurant;
 import net.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,6 +19,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -58,4 +62,44 @@ class WishlistControllerTest {
 
     }
 
+    @Test
+    public void itCanRemoveRestaurantFromWishlist() {
+        //given
+        long restaurant_ID = 1;
+        long customer_ID = 2;
+
+        //when
+        underTest.removeRestaurantFromWishlist(restaurant_ID, customer_ID);
+        ArgumentCaptor<Long> restaurantIDCaptor = ArgumentCaptor.forClass(Long.class);
+        ArgumentCaptor<Long> customerIDCaptor = ArgumentCaptor.forClass(Long.class);
+
+        //then
+        verify(wishlistService).removeRestaurantFromWishlist(restaurantIDCaptor.capture(), customerIDCaptor.capture());
+        Long arg1Sent = restaurantIDCaptor.getValue();
+        Long arg2Sent = customerIDCaptor.getValue();
+
+        assertThat(arg1Sent).isEqualTo(restaurant_ID);
+        assertThat(arg2Sent).isEqualTo(customer_ID);
+    }
+
+    @Test
+    public void itCanGetWishlist(){
+        //given
+        long customer_ID = 1;
+        Restaurant restaurant = new Restaurant("greggs",
+                "1 high st","food",3,true,true,true,
+                5, 1, null);
+        when(wishlistService.getWishlist(customer_ID)).thenReturn(List.of(restaurant));
+
+        //when
+
+        List<Restaurant> restaurants = underTest.getWishlist(customer_ID);
+        ArgumentCaptor<Long> customerIDCaptor = ArgumentCaptor.forClass(Long.class);
+
+        //then
+        verify(wishlistService).getWishlist(customerIDCaptor.capture());
+        Long arg1Sent = customerIDCaptor.getValue();
+        assertThat(arg1Sent).isEqualTo(customer_ID);
+        assertThat(restaurants).isEqualTo(wishlistService.getWishlist(customer_ID));
+    }
 }

@@ -13,3 +13,4 @@ CREATE TABLE wishlists(
 );
 
 INSERT INTO reviews(rating, reviewComment, restaurant_ID, customer_ID) VALUES( 5, 'good service', 1, 1);
+
