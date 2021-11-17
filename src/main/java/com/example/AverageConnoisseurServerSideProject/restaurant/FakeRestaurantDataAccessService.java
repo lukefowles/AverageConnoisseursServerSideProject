@@ -50,16 +50,16 @@ public class FakeRestaurantDataAccessService implements RestaurantDAO {
         return restaurant;
     }
 
-    @Override
-    public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
-        return Optional.of(db.stream().filter(r -> r.getCuisine().contains(restaurantCriteria.getCuisine())
-                                    && r.isVegetarian() == restaurantCriteria.isVegetarian()
-                                    && r.isHalal() == restaurantCriteria.isIshalal()
-                                    && r.isGlutenFree() == restaurantCriteria.isGlutenFree()
-                                    && r.getPrice() <= restaurantCriteria.getPrice()
-                                    && r.getAverageRating() >= restaurantCriteria.getAverageRating()
-                                    ).collect(Collectors.toList()));
-    }
+//    @Override
+//    public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
+//        return Optional.of(db.stream().filter(r -> r.getCuisine().contains(restaurantCriteria.getCuisine())
+//                                    && r.isVegetarian() == restaurantCriteria.isVegetarian()
+//                                    && r.isHalal() == restaurantCriteria.isIshalal()
+//                                    && r.isGlutenFree() == restaurantCriteria.isGlutenFree()
+//                                    && r.getPrice() <= restaurantCriteria.getPrice()
+//                                    && r.getAverageRating() >= restaurantCriteria.getAverageRating()
+//                                    ).collect(Collectors.toList()));
+//    }
 
     @Override
 

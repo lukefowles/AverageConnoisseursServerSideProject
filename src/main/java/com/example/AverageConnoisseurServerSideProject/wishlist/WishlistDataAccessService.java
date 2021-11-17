@@ -68,13 +68,5 @@ public class WishlistDataAccessService implements WishlistDAO {
         jdbcTemplate.update(sql, customer_ID);
     }
 
-//    @Override
-//    public Wishlist returnFavourite(long wishlist_id) {
-//        String sql = """
-//                SELECT *
-//                FROM wishlists
-//                WHERE id = ?
-//                """;
-//        return  jdbcTemplate.query(sql, wishlistRowMapper, wishlist_id).stream().findAny().get();
-//    }
+
 }
