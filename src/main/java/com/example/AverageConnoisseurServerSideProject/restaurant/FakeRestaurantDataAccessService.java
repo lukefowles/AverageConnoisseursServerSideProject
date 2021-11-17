@@ -73,5 +73,10 @@ public class FakeRestaurantDataAccessService implements RestaurantDAO {
     public List<Restaurant> getAllRestaurants() {
         return null;
     }
+
+    @Override
+    public Optional<List<Restaurant>> selectRestaurantFromCriteria(String cuisineCondition, boolean vegCondition1, boolean vegCondition2, boolean halalCondition1, boolean halalCondition2, boolean glutenCondition1, boolean glutenCondition2, int priceCondition, float ratingCondition) {
+        return Optional.empty();
+    }
 }
 

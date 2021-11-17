@@ -65,11 +65,25 @@ public class RestaurantService {
 
     public Optional<List<Restaurant>> selectRestaurantFromCriteria(RestaurantCriteria restaurantCriteria) {
 
+        //Conditions to pass into SQL statement
+        String cuisineCondition = restaurantCriteria.getCuisine();
+        boolean vegCondition1 = true;
+        boolean vegCondition2 = restaurantCriteria.isVegetarian();
+        boolean halalCondition1 = true;
+        boolean halalCondition2 = restaurantCriteria.isIshalal();
+        boolean glutenCondition1 = true;
+        boolean glutenCondition2 = restaurantCriteria.isGlutenFree();
+        int priceCondition = restaurantCriteria.getPrice();
+        float ratingCondition = restaurantCriteria.getAverageRating();
+
         if(restaurantDAO.selectRestaurantFromCriteria(restaurantCriteria).isEmpty())
         {
             throw new ResourceNotFound("No restaurants found matching these criteria");
         }
-        return restaurantDAO.selectRestaurantFromCriteria(restaurantCriteria);
+
+
+        return restaurantDAO.selectRestaurantFromCriteria(cuisineCondition, vegCondition1, vegCondition2, halalCondition1,
+        halalCondition2, glutenCondition1, glutenCondition2, priceCondition, ratingCondition);
     }
 
 

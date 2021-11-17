@@ -38,4 +38,7 @@ public class WishlistService {
     }
 
 
+//    public Wishlist returnFavourite(long wishlist_id) {
+//        return wishlistDAO.returnFavourite(wishlist_id);
+//    }
 }
