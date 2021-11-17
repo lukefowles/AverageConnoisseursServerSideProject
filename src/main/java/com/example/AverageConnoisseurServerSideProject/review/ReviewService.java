@@ -55,6 +55,8 @@ public class ReviewService {
     public void updateReview(long review_ID, Review review){
 
         reviewDAO.updateReview(review_ID, review);
+        float newAverage = reviewDAO.calculateRestaurantAverageRating(review.getRestaurant_ID());
+        restaurantDAO.updateRestaurantAverageRating(review.getRestaurant_ID(), newAverage);
     };
 
    //Could also implement logic to get restaurant from review ID.
