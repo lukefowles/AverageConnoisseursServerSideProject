@@ -15,16 +15,12 @@ public class WishlistController {
     @Autowired
     public WishlistController(WishlistService wishlistService) {this.wishlistService = wishlistService;}
 
-//    @PostMapping
-//    public void addRestaurantToWishlist(@RequestBody Wishlist wishlist)
-//    {wishlistService.addRestaurantToWishlist(wishlist);}
 
     @PostMapping ("{id}/{id2}")
     public void addRestaurantToWishlist(@PathVariable("id") long restaurant_ID, @PathVariable("id2") long customer_ID)
     {wishlistService.addRestaurantToWishlist(restaurant_ID, customer_ID);
 
     }
-
 
 
     @GetMapping(path = "{id}")

@@ -21,7 +21,6 @@ public class CustomerService {
 
     public void addCustomerToDatabase(Customer customer){
 
-        //Could add method to check if customer with that email address already exists
         customerDAO.addCustomerToDatabase(customer);
     }
 

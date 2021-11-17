@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+//Row mapper class to map SQL columns to a new Customer object.
 @Component
 public class CustomerRowMapper implements RowMapper<Customer> {
 

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+//Fake data access service class we were using initially to demo our Spring Boot Application. Same with all
+//fake data access service classes.
 @Repository("Fake")
 public class FakeCustomerDataAccessService implements CustomerDAO {
     private List<Customer> db = new ArrayList<>();
