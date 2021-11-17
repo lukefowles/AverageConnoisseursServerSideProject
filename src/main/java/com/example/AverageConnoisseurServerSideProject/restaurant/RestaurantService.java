@@ -2,6 +2,8 @@ package com.example.AverageConnoisseurServerSideProject.restaurant;
 
 import com.example.AverageConnoisseurServerSideProject.exceptions.ResourceNotFound;
 import com.example.AverageConnoisseurServerSideProject.review.Review;
+import com.example.AverageConnoisseurServerSideProject.review.ReviewDAO;
+import com.example.AverageConnoisseurServerSideProject.wishlist.WishlistDAO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +14,15 @@ import java.util.Optional;
 public class RestaurantService {
 
     private RestaurantDAO restaurantDAO;
+    private WishlistDAO wishlistDAO;
+    private ReviewDAO reviewDAO;
 
-    public RestaurantService(@Qualifier("postgres") RestaurantDAO restaurantDAO) {
+
+    public RestaurantService(@Qualifier("postgres") RestaurantDAO restaurantDAO, @Qualifier("PostgresWishlist") WishlistDAO wishlistDAO,
+                             @Qualifier("PostgresReview") ReviewDAO reviewDAO) {
         this.restaurantDAO = restaurantDAO;
+        this.wishlistDAO = wishlistDAO;
+        this.reviewDAO = reviewDAO;
     };
 
     public void addRestaurant(Restaurant restaurant){
@@ -31,6 +39,8 @@ public class RestaurantService {
         }
 
         restaurantDAO.removeRestaurant(id);
+        reviewDAO.deleteReviewsByRestaurant(id);
+        wishlistDAO.removeWishlistWithRestaurantID(id);
     };
 
     public void updateRestaurant(long id, Restaurant restaurant){

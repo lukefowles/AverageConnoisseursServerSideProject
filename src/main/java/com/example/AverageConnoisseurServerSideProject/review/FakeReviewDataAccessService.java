@@ -58,4 +58,14 @@ public class FakeReviewDataAccessService implements ReviewDAO {
         return 0;
     }
 
+    @Override
+    public void deleteReviewsByCustomer(long customer_ID) {
+
+    }
+
+    @Override
+    public void deleteReviewsByRestaurant(long restaurant_ID) {
+
+    }
+
 }

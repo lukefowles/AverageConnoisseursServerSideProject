@@ -1,6 +1,8 @@
 package com.example.AverageConnoisseurServerSideProject.customer;
 
 import com.example.AverageConnoisseurServerSideProject.exceptions.ResourceNotFound;
+import com.example.AverageConnoisseurServerSideProject.review.ReviewDAO;
+import com.example.AverageConnoisseurServerSideProject.wishlist.WishlistDAO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,13 @@ import java.util.regex.Pattern;
 public class CustomerService {
 
     private CustomerDAO customerDAO;
+    private WishlistDAO wishlistDAO;
+    private ReviewDAO reviewDAO;
 
-    public CustomerService(@Qualifier("postgresCustomer") CustomerDAO customerDAO){
-
+    public CustomerService(@Qualifier("postgresCustomer") CustomerDAO customerDAO, @Qualifier("PostgresWishlist")
+            WishlistDAO wishlistDAO, @Qualifier("PostgresReview") ReviewDAO reviewDAO){
+        this.wishlistDAO = wishlistDAO;
+        this.reviewDAO = reviewDAO;
         this.customerDAO = customerDAO;
     }
 
@@ -30,6 +36,8 @@ public class CustomerService {
         {
             throw new ResourceNotFound("Person with this id does not exist");
         }
+        wishlistDAO.removeWishlistWithCustomerID(id);
+        reviewDAO.deleteReviewsByCustomer(id);
 
         customerDAO.removeCustomerFromDatabase(id);
     }

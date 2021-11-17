@@ -58,10 +58,10 @@ public class CustomerDataAccessService implements CustomerDAO {
     public void updateCustomer(long id, Customer customer) {
         String sql = """
                 UPDATE customers 
-                SET customerName = ?, email = ?, mobileNumber = ?, id = ?
+                SET customerName = ?, email = ?, mobileNumber = ?
                 WHERE id = ?
                 """;
-        jdbcTemplate.update(sql, customer.getName(), customer.getNumber(), customer.getEmail(), customer.getId());
+        jdbcTemplate.update(sql, customer.getName(), customer.getEmail(),customer.getNumber(), customer.getId());
 
     }
 

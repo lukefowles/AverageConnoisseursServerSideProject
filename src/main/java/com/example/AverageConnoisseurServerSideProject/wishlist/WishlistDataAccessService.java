@@ -51,4 +51,20 @@ public class WishlistDataAccessService implements WishlistDAO {
                 """;
         return jdbcTemplate.query(sql, restaurantRowMapper, customer_ID);
     }
+
+
+    @Override
+    public void removeWishlistWithRestaurantID(long restaurant_ID){
+        String sql = """
+        DELETE * FROM wishlists WHERE restaurant_ID = ?;        
+        """;
+        jdbcTemplate.update(sql, restaurant_ID);
+    }
+
+    @Override
+    public void removeWishlistWithCustomerID(long customer_ID){
+        String sql = """
+                DELETE * FROM wishlists WHERE customer_ID = ?;""";
+        jdbcTemplate.update(sql, customer_ID);
+    }
 }
