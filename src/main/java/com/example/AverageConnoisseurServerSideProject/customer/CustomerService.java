@@ -40,7 +40,6 @@ public class CustomerService {
         //Call methods to delete reviews and wishlists from the database for that customer
         wishlistDAO.removeWishlistWithCustomerID(id);
         reviewDAO.deleteReviewsByCustomer(id);
-
         customerDAO.removeCustomerFromDatabase(id);
     }
 

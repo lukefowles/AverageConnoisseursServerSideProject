@@ -14,4 +14,6 @@ public interface WishlistDAO {
     void removeWishlistWithCustomerID(long id);
 
     void removeWishlistWithRestaurantID(long id);
+
+    List<Wishlist> getAllWishlisted();
 }

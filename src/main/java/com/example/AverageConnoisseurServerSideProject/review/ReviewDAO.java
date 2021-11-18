@@ -14,4 +14,6 @@ public interface ReviewDAO {
     void deleteReviewsByCustomer(long customer_ID);
 
     void deleteReviewsByRestaurant(long restaurant_ID);
+
+    List<Review> getAllReviews();
 }

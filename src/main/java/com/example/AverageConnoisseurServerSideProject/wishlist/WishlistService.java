@@ -37,6 +37,10 @@ public class WishlistService {
         return wishlistDAO.getWishlist(customer_ID);
     }
 
+    public List<Wishlist> getAllWishlisted() {
+        return wishlistDAO.getAllWishlisted();
+    }
+
 
 //    public Wishlist returnFavourite(long wishlist_id) {
 //        return wishlistDAO.returnFavourite(wishlist_id);

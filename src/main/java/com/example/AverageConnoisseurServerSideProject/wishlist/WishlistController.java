@@ -28,6 +28,12 @@ public class WishlistController {
         return wishlistService.getWishlist(customer_ID);
     }
 
+    //Method to get all wishlisted items
+    @GetMapping("/allWishlist")
+    public List<Wishlist> getAllWishlisted() {
+        return wishlistService.getAllWishlisted();
+    }
+
     //Method to delete a restaurant from a wishlist based on customer and restaurant_ID
     @DeleteMapping ("{id}/{id2}")
     public void removeRestaurantFromWishlist(@PathVariable("id") long restaurant_ID, @PathVariable("id2") long customer_ID)
