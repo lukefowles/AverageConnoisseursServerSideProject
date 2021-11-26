@@ -40,7 +40,7 @@ Within our project we have five POJOs, Customer, Restaurant, RestaurantCriteria,
 
 -The RestuarantCriteria class is used solely to enable for querying of the restaurantDatabase. It takes all possible search parameters at once, which can pose a problem if one would only want to put in certain selection constraints. This can be sidestepped choosing default values for the search parameters which do not set constraints. The default restaurant criteria will look like:
 
-Restaurant {
+RestaurantCriteria {
 cuisine: "",
 isVegetarian: false,
 ishalal: false,
