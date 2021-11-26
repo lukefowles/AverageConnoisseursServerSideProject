@@ -38,12 +38,27 @@ Within our project we have five POJOs, Customer, Restaurant, RestaurantCriteria,
 
 -In order to add a customer to the database, you have to provide a customer in JSON format to the API. This value of this customer's id will be changed on addition to the SQL database. In order to improve our project, we could have implement a method within the customer service class that returns the new id when a customer is created (for instance, by querying the sql database for the email address).
 
--The RestuarantCriteria class is used solely to enable for querying of the restaurantDatabase. It takes all possible search parameters at once, which can pose a problem if one would only want to put in certain selection constraints. This can be sidestepped choosing default values for the search parameters which do not set constraints (i.e. null)
+-The RestuarantCriteria class is used solely to enable for querying of the restaurantDatabase. It takes all possible search parameters at once, which can pose a problem if one would only want to put in certain selection constraints. This can be sidestepped choosing default values for the search parameters which do not set constraints. The default restaurant criteria will look like:
+
+Restaurant {
+cuisine: "",
+isVegetarian: false,
+ishalal: false,
+isGlutenFree: false,
+price: 3,
+averageRating: 0
+}
 
 -An instance of our wishlist class represents one item on a customer's wishlist, and not the entire wishlist itself. For example, the method which returns a customers wishlist, actually returns a list of wishlisht objects (List<Wishlist>).
 
   
 Below we have attached our class diagrams and entity relationship diagrams for reference:
+  
+  
+  ![image](https://user-images.githubusercontent.com/83702748/143553860-109ffb82-a1ed-48fe-9c15-472126e33d27.png)
+  
+  ![image](https://user-images.githubusercontent.com/83702748/143553959-b77f5241-0be9-4b69-a3f1-5f4dcf06aa80.png)
+
   
   
 # Credits
